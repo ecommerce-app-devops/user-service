@@ -86,7 +86,11 @@ class UserServiceIntegrationTest {
                 .isCredentialsNonExpired(true)
                 .user(user)
                 .build();
-        credentialRepository.save(credential);
+        credential = credentialRepository.save(credential);
+        
+        // Update user to have credential reference
+        user.setCredential(credential);
+        user = userRepository.save(user);
 
         // When
         UserDto result = userService.findById(user.getUserId());
@@ -121,7 +125,11 @@ class UserServiceIntegrationTest {
                 .isCredentialsNonExpired(true)
                 .user(userWithCredential)
                 .build();
-        credentialRepository.save(credential);
+        credential = credentialRepository.save(credential);
+        
+        // Update user to have credential reference
+        userWithCredential.setCredential(credential);
+        userWithCredential = userRepository.save(userWithCredential);
 
         User userWithoutCredential = User.builder()
                 .firstName("Jane")
@@ -163,6 +171,10 @@ class UserServiceIntegrationTest {
                 .user(user)
                 .build();
         credential = credentialRepository.save(credential);
+        
+        // Update user to have credential reference
+        user.setCredential(credential);
+        user = userRepository.save(user);
 
         Integer userId = user.getUserId();
         Integer credentialId = credential.getCredentialId();
@@ -199,7 +211,11 @@ class UserServiceIntegrationTest {
                 .isCredentialsNonExpired(true)
                 .user(user)
                 .build();
-        credentialRepository.save(credential);
+        credential = credentialRepository.save(credential);
+        
+        // Update user to have credential reference
+        user.setCredential(credential);
+        user = userRepository.save(user);
 
         UserDto updatedUserDto = UserDto.builder()
                 .userId(user.getUserId())

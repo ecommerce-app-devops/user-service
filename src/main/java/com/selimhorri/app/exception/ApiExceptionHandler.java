@@ -44,7 +44,6 @@ public class ApiExceptionHandler {
 	}
 	
 	@ExceptionHandler(value = {
-		UserObjectNotFoundException.class,
 		CredentialNotFoundException.class,
 		VerificationTokenNotFoundException.class,
 		AddressNotFoundException.class,

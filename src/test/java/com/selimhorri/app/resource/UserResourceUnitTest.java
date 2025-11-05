@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.selimhorri.app.dto.CredentialDto;
 import com.selimhorri.app.dto.UserDto;
+import com.selimhorri.app.exception.handler.GlobalExceptionHandler;
 import com.selimhorri.app.exception.wrapper.UserObjectNotFoundException;
 import com.selimhorri.app.service.UserService;
 
@@ -42,7 +43,9 @@ class UserResourceUnitTest {
 
     @BeforeEach
     void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(userResource).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(userResource)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
         objectMapper = new ObjectMapper();
 
         CredentialDto credentialDto = CredentialDto.builder()
@@ -71,9 +74,9 @@ class UserResourceUnitTest {
         // When & Then
         mockMvc.perform(get("/api/users"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.dtos").isArray())
-                .andExpect(jsonPath("$.dtos[0].userId").value(1))
-                .andExpect(jsonPath("$.dtos[0].firstName").value("John"));
+                .andExpect(jsonPath("$.collection").isArray())
+                .andExpect(jsonPath("$.collection[0].userId").value(1))
+                .andExpect(jsonPath("$.collection[0].firstName").value("John"));
 
         verify(userService, times(1)).findAll();
     }
