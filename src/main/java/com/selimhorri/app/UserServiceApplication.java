@@ -15,9 +15,3 @@ public class UserServiceApplication {
 	
 	
 }
-
-
-
-
-
-

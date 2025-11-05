@@ -78,10 +78,7 @@ public class AddressResource {
 		log.info("*** Boolean, resource; delete address by id *");
 		this.addressService.deleteById(Integer.parseInt(addressId));
 		return ResponseEntity.ok(true);
-	}
-	
-	
-	
+	}	
 }
 
 

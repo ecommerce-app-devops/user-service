@@ -40,13 +40,3 @@ public class UserDto implements Serializable {
 	private CredentialDto credentialDto;
 	
 }
-
-
-
-
-
-
-
-
-
-
